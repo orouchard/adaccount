@@ -1,0 +1,30 @@
+<div id="<%= dom_id invoice %>">
+
+<div class="row">
+  <div class="col-4">
+    <strong>Currency:</strong>
+    <%= invoice.currency %>
+  </div>
+
+  <div class="col-4">
+    <strong>Date issue:</strong>
+    <%= invoice.date_issue %>
+  </div>
+
+  <div class="col-4">
+    <strong>Date due:</strong>
+    <%= invoice.date_due %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-8">
+    <p><strong>Description: </strong><%= invoice.description %> <%= link_to "Delete Invoice", wizard_destroy_path(@invoice), class: "badge text-bg-danger" %></p>
+  </div>
+  
+  <div class="col-4">
+    <p>Total: <strong><%= to_amount(invoice.total, invoice.currency) %></strong></p>
+  </div>
+</div>
+
+</div>

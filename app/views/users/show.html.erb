@@ -1,0 +1,61 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "Contacts", users_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "[edit]", edit_user_path(@user) %></li>
+  </ol>
+</nav>
+
+<p style="color: green"><%= notice %></p>
+
+<%= render "user", user: @user %>
+
+<hr/>
+
+<% if @invoices.size > 0 %>
+<h3>Invoices</h3>
+<table class="table mb-3">
+  <thead>
+    <tr>
+      <th class="col">Issue Date</th>
+      <th class="col">Due Date</th>
+      <th class="col">Description</th>
+      <th class="col" colspan="2">Amount</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @invoices.each do |i| %>
+    <tr>
+      <td><%= read_date_word(i.date_issue) %></td>
+      <td><%= read_date_word(i.date_due) %></td>
+      <th class="col"><%= link_to i.description, i %></th>
+      <td><%= to_amount(i.total, i.currency) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<p class="d-inline-flex gap-1">
+  <a data-bs-toggle="collapse" href="#newIvoice" role="button" aria-expanded="false" aria-controls="collapseExample">
+    [New Invoice]
+  </a>
+  <% if @user.tags.map(&:name).include?("Student") %>
+  | <a data-bs-toggle="collapse" href="#newWizzardStudentEnrollment12" role="button" aria-expanded="false" aria-controls="collapseExample">
+    [New student wizard enrolment]
+  </a>
+  <% end %>
+</p>
+<div class="collapse mb-5" id="newIvoice">
+  <div class="card card-body">
+    <%= render "invoices/user_form", invoice: @user.invoices.new %>
+  </div>
+</div>
+<% if @user.tags.map(&:name).include?("Student") %>
+<div class="collapse_ mb-5" id="newWizzardStudentEnrollment_">
+  <div class="card card-body">
+    <%= render "wizard/enrollment" %>
+  </div>
+</div>
+<% end %>

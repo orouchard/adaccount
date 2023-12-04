@@ -1,0 +1,37 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+	<li class="breadcrumb-item active" aria-current="page"><%= link_to "Accounts", accounts_path %></li>
+  </ol>
+</nav>
+
+<p style="color: green"><%= notice %></p>
+
+<%= render @account %>
+
+<ul class="list-group mt-5">
+  <li class="list-group-item">
+	  <div class="row">
+		  <div class="col-8"></div>
+		  <div class="col-2">Debit</div>
+		  <div class="col-2">Credit</div>
+	  </div>
+  </li>
+  <% @entries.each do |entry| %>
+  <li class="list-group-item">
+	  <div class="row">
+		  <div class="col-8">
+			<%= entry.journal.description %>
+		  </div>
+		  <% if entry.flow == "debit" %>
+		  <div class="col-2"><%= to_amount(entry.amount, "vnd") %></div>
+		  <div class="col-2"></div>
+		  <% elsif entry.flow == "credit" %>
+		  <div class="col-2"></div>
+		  <div class="col-2"><%= to_amount(entry.amount, "vnd") %></div>
+		  <% end %>
+	  </div>
+  </li>
+  <% end %>
+</ul>
+<h3><%= to_amount(@total, "vnd") %></h3>

@@ -1,0 +1,26 @@
+<div id="<%= dom_id account %>">
+  
+<div class="row mb-3">
+  <div class="col-3">
+    Account number:<br />
+    <strong><%= account.account_number %></strong> <%= link_to "[edit]", edit_account_path(@account) %>
+  </div>
+
+  <div class="col-7">
+    Title:<br />
+    <strong><%= account.title %></strong>
+  </div>
+
+  <div class="col-2">
+    Increases:<br />
+    <strong><%= account.increases %></strong>
+  </div>
+</div>
+
+<div class="row">
+<div class="col-12">
+  <strong><%= account.description %>
+</div>
+</div>
+
+</div>

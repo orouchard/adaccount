@@ -1,0 +1,42 @@
+<%= form_with(model: [@invoice, line_item]) do |f| %>
+<% if line_item.errors.any? %>
+	<div style="color: red">
+	  <h3><%= pluralize(line_item.errors.count, "error") %> prohibited this Line Item from being saved:</h3>
+
+	  <ul>
+		<% line_item.errors.each do |error| %>
+		  <li><%= error.full_message %></li>
+		<% end %>
+	  </ul>
+	</div>
+<% end %>
+
+	<div class="row mb-3">
+		<div class="col">
+			<%= f.label :product_id, class: "form-label" %><br />
+			<%= f.collection_select :product_id, Product.active, :id, :name, prompt: true %>
+		</div>
+		<div class="col">
+			<%= f.label :price, "Price in #{@invoice.currency.upcase}", class: "form-label" %>
+			<%= f.text_field :price, class: "form-control" %>
+		</div>
+		<div class="col">
+			<%= f.label :factor, class: "form-label" %>
+			<%= f.text_field :factor, class: "form-control" %>
+		</div>
+		<div class="col">
+			<%= f.label :nbr, class: "form-label" %>
+			<%= f.text_field :nbr, class: "form-control" %>
+		</div>
+	</div>
+		
+	<div class="row">
+		<div class="col-8">
+			<%= f.label :note, class: "form-label" %>
+			<%= f.text_field :note, class: "form-control" %>
+		</div>
+		<div class="col-4 position-relative">
+			<%= f.submit "Submit", class: "btn btn-outline-success btn-sm position-absolute bottom-0 end-0" %>
+		</div>
+	</div>
+<% end %>

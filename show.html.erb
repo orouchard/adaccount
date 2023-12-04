@@ -1,0 +1,14 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "Accounts", accounts_path %></li>
+  </ol>
+</nav>
+
+<p style="color: green"><%= notice %></p>
+
+<%= render @account %>
+
+<div>
+  <%= link_to "Edit", edit_account_path(@account), class: "btn btn-outline-primary" %>
+</div>

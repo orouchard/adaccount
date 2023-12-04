@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product: one
+  date_from: 2023-11-14
+  date_to: 2023-11-14
+  amount: 1.5
+  currency: MyString
+  active: false
+
+two:
+  product: two
+  date_from: 2023-11-14
+  date_to: 2023-11-14
+  amount: 1.5
+  currency: MyString
+  active: false

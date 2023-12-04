@@ -1,0 +1,17 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "Contacts", users_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to @user.name, @user %></li>
+  </ol>
+</nav>
+
+<h1>Editing user</h1>
+
+<%= render "form", user: @user %>
+
+<hr class="mb-3"/>
+
+<div>
+  <%= button_to "Destroy this user", @user, method: :delete, class: "btn btn-outline-danger" %>
+</div>

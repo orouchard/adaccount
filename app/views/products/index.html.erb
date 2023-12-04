@@ -1,0 +1,36 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+  </ol>
+</nav>
+
+<p style="color: green"><%= notice %></p>
+
+<h1>Products</h1>
+
+<div id="products">
+  <table class="table mb-3">
+    <thead>
+      <tr>
+        <th class="col">Name</th>
+        <th class="col">Description</th>
+        <th class="col">Kind</th>
+        <th class="col" colspan="2">Active</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @products.each do |p| %>
+        <tr>
+          <td><%= p.name %></td>
+          <td><%= p.description %></td>
+          <td><%= p.kind %></td>
+          <td><span class="<%= "badge rounded-pill #{active(p.active)}" %>"><%= active_status(p.active) %></span></td>
+          <td><%= link_to ">>", p %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= link_to "New product", new_product_path %>

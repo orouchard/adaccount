@@ -1,0 +1,25 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+  </ol>
+</nav>
+
+<p style="color: green"><%= notice %></p>
+
+<h1>Invoices</h1>
+
+<div id="invoices">
+  <% @invoices.each do |invoice| %>
+    <div class="row border-bottom">
+      <div class="col-8">
+        <%= render invoice %>
+      </div>
+      <div class="col-4">
+        <p>
+          <strong><%= invoice.user.name %></strong> - <small><%= invoice.user.title %>, <%= invoice.user.nationality %></small><br/>
+          <%= link_to ">>", invoice %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>

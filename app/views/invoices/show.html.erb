@@ -1,0 +1,86 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to @invoice.user.name, @invoice.user %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "[edit]", edit_invoice_path(@invoice) %></li>
+  </ol>
+</nav>
+
+<p style="color: green"><%= notice %></p>
+
+<%= render "users/user", user: @invoice.user %>
+
+<%= render @invoice %>
+
+<hr class="mb-3" />
+
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Product</th>
+      <th class="text-end">Price</th>
+      <th class="text-end">Factor</th>
+      <th class="text-end">Nbr</th>
+      <th class="text-end">Amount</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @line_items.each.with_index(1) do |lt, i| %>
+      <tr class="<%= odd_bg(i) %>">
+        <td><small><%= link_to "[edit]", edit_invoice_line_item_path(@invoice, lt) %></small></td>
+        <td>
+          <%= lt.product.name %> <span class="small">
+            <small><%= lt.product.description %>
+            <% unless lt.note == "" || lt.note.nil? %>
+            <br />Note: <%= lt.note %></small>
+            <% end %>
+          </span>
+        </td>
+        <td class="text-end"><%= to_amount(lt.price, @invoice.currency) %></td>
+        <td class="text-end"><%= lt.factor %></td>
+        <td class="text-end"><%= lt.nbr %></td>
+        <td class="text-end"><%= to_amount(lt.amount, @invoice.currency) %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td colspan="5" class="text-end">Total:</td>
+      <td class="text-end"><strong><%= to_amount(@invoice.total, @invoice.currency) %></strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="d-inline-flex gap-1">
+  <a data-bs-toggle="collapse" href="#newLineItem" role="button" aria-expanded="false" aria-controls="collapseExample">
+    [New Line]
+  </a>
+</p>
+<div class="collapse" id="newLineItem">
+  <div class="card card-body">
+    <%= render "line_items/form", line_item: @invoice.line_items.new %>
+  </div>
+</div>
+
+<h2>Journal Entries</h2>
+
+<%= render "journals/index" %>
+
+<p class="d-inline-flex gap-1">
+  <a data-bs-toggle="collapse" href="#newJournal" role="button" aria-expanded="false" aria-controls="collapseExample">
+    [New Journal]
+  </a> - 
+  <a data-bs-toggle="collapse" href="#newWizard" role="button" aria-expanded="false" aria-controls="collapseExample">
+    [Wizard Journal]
+  </a>
+</p>
+<div class="collapse mb-5" id="newJournal">
+  <div class="card card-body">
+    <%= render "form_create", journal: @invoice.journals.new %>
+  </div>
+</div>
+<div class="collapse mb-5" id="newWizard">
+  <div class="card card-body">
+    <%= render "wizard" %>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div id="<%= dom_id user %>">
+  <h1><%= user.name %><br/>
+  <small><%= user.title %>, <%= user.nationality %></small></h1>
+  <h3>
+    <% user.tags.each do |t| %>
+    <%= link_to t.name, users_category_path(t), class: "btn btn-#{t.style}" %>
+    <%=  %>
+    <% end %>
+  </h3>
+</div>
+

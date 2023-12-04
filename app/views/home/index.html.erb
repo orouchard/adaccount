@@ -1,0 +1,49 @@
+<h1 class="mb-5">Income Statement</h1>
+<%= @monthly_entries.size %>
+<hr />
+<%= to_amount month_total(@monthly_entries, @account), "vnd" %>
+
+<% @months.in_groups_of(12) do |group| %>
+<div class="mb-5">
+	<h2><%= group[0].year %></h2>
+	
+	<table class="table">
+		<thead>
+	  	<tr class="table-secondary text-end">
+			<th scope="col"></th>
+			<% group.each do |month| %>
+			<th scope="col text-end"><%= month.strftime("%b") %></th>
+			<% end %>	
+			<th scope="col">Total</th>
+	  	</tr>
+		</thead>
+		<tbody>
+		<% @groups.keys.each do |key| %>
+		<tr class="table-light">
+			<th scope="row"><%= key %></td>
+			<% group.each do |month| %>
+			<td></td>
+			<% end %>	
+			<td></td>
+		</tr>
+		<% @groups[key].each do |sub| %>
+		<tr class="text-end">
+			<td><%= sub %></td>
+			<% group.each do |month| %>
+			<td class="text-dark">#value</td>
+			<% end %>	
+			<td><strong>#total</strong></td>
+		</tr>
+		<% end %>
+		<tr class="text-end">
+			<th scope="col">Total</th>
+			<% group.each do |month| %>
+			<td><strong>#total</strong></td>
+			<% end %>	
+			<td><strong>#total</strong></td>
+		</tr>
+		<% end %>
+		</tbody>
+	</table>
+</div>
+<% end %>

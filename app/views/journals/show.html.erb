@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col">
+    <p>Date: <strong><%= read_date @journal.date %></strong></p>
+    <p>Reason: <strong><%= @journal.description %></strong></p>
+  </div>
+  <div class="col">
+    <% if @journal.invoices.size >= 1 %>
+    <%= link_to "Back to the invoice", @journal.invoices.first %>
+    <% end %>
+  </div>
+</div>
+  
+<ul class="list-group">
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-4"><strong>Title</strong></div>
+      <div class="col-3">Debit</div>
+      <div class="col-2">Credit</div>
+    </div>
+  </li>
+<% @entries.each do |e| %>
+    <%= render(render_entries(e.flow, e.id), e: e) if e.active == true %>
+<% end %>
+  <%= render "entries/new_entry_button" if action_name == 'show'%>
+  <%= render "entries/new" if action_name == 'new'%>
+
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-5">
+        <%= link_to "Check Journal Enty", check_journal_path(@journal)%> | <%= journal_is_balanced(@journal.balanced) %>
+      </div>
+      <div class="col-2"><strong>TOTAL</strong></div>
+      <div class="col-3"><strong><%= to_amount(@debit, 'vnd') %></strong></div>
+      <div class="col-2"><strong><%= to_amount(@credit, 'vnd') %></strong></div>
+    </div>
+  </li>
+</ul>
+
+<% if @entries.pluck(:active).uniq.include?('0') %>
+<hr>
+
+  <a data-toggle="collapse" href="#collapseEntries" role="button" aria-expanded="false" aria-controls="collapseEntries">
+    <strong>Rejected Entries</strong>
+  </a>
+
+
+<ul class="list-group collapse" id="collapseEntries">
+  <% @entries.each do |e| %>
+      <%= render(render_entries(e.flow, e.id), e: e) if e.status == '0' %>
+  <% end %>
+</ul>
+
+<% end %>
+<p>
+  <%# receipt(@journal) %>
+</p>
+
+<%= link_to 'Edit', edit_journal_path(@journal), class: "btn btn-outline-primary" %>

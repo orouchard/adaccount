@@ -1,0 +1,45 @@
+<%= form_with(model: journal) do |form| %>
+  <% if journal.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(journal.errors.count, "error") %> prohibited this journal from being saved:</h2>
+
+      <ul>
+        <% journal.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row g-5 mb-3">
+    <div class="col-3">
+      <%= form.select :currency, ["vnd"], {}, {class: "form-select"} %>
+    </div>
+  
+    <div class="col-3">
+      <%= form.label :active, class: "form-label" %>
+      <%= form.check_box :active, class: "form-check-input" %>
+    </div>
+  
+    <div class="col-6">
+      <%= form.select :trans_nat, @trans_nat, {prompt: "Choose a Transaction Type"}, {class: "form-select"} %>
+    </div>
+  </div>
+  
+  <div class="row g-5 mb-3">
+    <div class="col-6">
+      <%= form.label :date, class: "form-label" %>
+      <%= form.datetime_field :date, class: "form-control" %>      
+    </div>
+    
+    <div class="col-6">
+      <%= form.label :description, class: "form-label" %>
+      <%= form.text_area :description, row: 3, class: "form-control" %>
+    </div>
+  </div>
+
+
+  <div class="ps-4">
+    <%= form.submit class: "btn btn-outline-success" %>
+  </div>
+<% end %>

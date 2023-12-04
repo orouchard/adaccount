@@ -1,0 +1,39 @@
+<%= form_with(model: user) do |form| %>
+  <% if user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row mb-3">
+    <div class="col text-end">
+      <%= form.label :title, "Gender", class: "form-label" %>
+      <%= form.collection_select :title, User.select(:title).distinct.map(&:title), :to_s, :to_s %>
+    </div>
+
+    <div class="col">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+  
+    <div class="col">
+      <%= form.label :nationality, class: "form-label" %>
+      <%= form.collection_select :nationality, Name.select(:country).distinct.map(&:country), :to_s, :to_s %>
+    </div>
+  </div>
+  
+  <div class="mb-3">
+    <%= form.collection_check_boxes(:tag_ids, Tag.where(active: true).order(:id), :id, :name) do |b| %>
+      <%= b.check_box(class: "form-check-input") %> <%= b.label(class: "form-check-label me-3") %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit "Save", class: "btn btn-outline-success" %>
+  </div>
+<% end %>

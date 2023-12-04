@@ -1,0 +1,16 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "Products", products_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to @product.name, @product %></li>
+  </ol>
+</nav>
+
+<h1>Editing <%= @product.name %></h1>
+
+<%= render "form", product: @product %>
+
+<hr class="mb-3">
+
+<%= button_to "Destroy this product", @product, method: :delete, class: "btn btn-outline-danger btn-sm" %>
+

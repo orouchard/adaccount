@@ -1,0 +1,9 @@
+<h1>Editing account</h1>
+
+<%= render "form", account: @account %>
+
+<hr class="mb-4"/>
+
+<div class="mb-3">
+  <%= button_to "Destroy this account", @account, method: :delete %>
+</div>

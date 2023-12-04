@@ -1,0 +1,39 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "Products", products_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "[edit]", edit_product_path(@product) %></li>
+  </ol>
+</nav>
+
+<p style="color: green"><%= notice %></p>
+
+<hr class="mb-3"/>
+
+<%= render @product %>
+
+<hr class="mb-3"/>
+
+<% if @prices.size > 0 %>
+<h3>Prices</h3>
+<table class="table mb-3">
+  <thead>
+    <tr>
+      <th class="col">Date From</th>
+      <th class="col">Date To</th>
+      <th class="col" colspan="2">Amount</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @prices.each do |p| %>
+    <tr>
+      <td><%= read_date(p.date_from) %></td>
+      <td><%= read_date(p.date_to) %></td>
+      <td><%= to_amount(p.amount, p.currency) %></td>
+      <td><%= link_to ">>", edit_price_path(p) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

@@ -1,0 +1,42 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+  </ol>
+</nav>
+
+<p style="color: green"><%= notice %></p>
+
+<h1>Chart of Accounts</h1>
+
+
+<table class="table table-striped" id="main_table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+      <th>Statement</th>
+      <th>Group</th>
+      <th>Sub-Group</th>
+      <th>Increases</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @accounts.each.with_index(1) do |account, i| %>
+      <tr class="<%= odd_bg(i) %>">
+        <td><%= link_to account.account_number, account %></td>
+        <td><%= account.title %></td>
+        <td><%= account.statement %></td>
+        <td><%= account.group %></td>
+        <td><%= account.subgroup %></td>
+        <td><%= account.increases %></td>
+        <td><span><%= link_to active_status(account.active), toggle_path(account), class: "badge rounded-pill #{active(account.active)}" %></span></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Account', new_account_path %>

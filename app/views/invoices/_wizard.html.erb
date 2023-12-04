@@ -1,0 +1,57 @@
+<%= form_with(url: journal_wizard_path(@invoice)) do |f| %>
+<div class="row mb-3">
+	<div class="col-6">
+		<%= f.label "wizz[label]", class: "form-label" do %>Description<% end %>
+		<%= f.text_field "wizz[label]", class: "form-control" %>
+	</div>
+	<div class="col-4">
+		<%= f.label "wizz[amount]", class: "form-label" do %>Total Amount<% end %>
+		<%= f.text_field "wizz[amount]", class: "form-control" %>
+	</div>
+	<div class="col-2">
+		<%= f.label "wizz[currency]", class: "form-label" do %>Currency<% end %>
+		<%= f.select "wizz[currency]", ["vnd"], {}, {class: "form-select"} %>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<div class="col-4">
+		<%= f.label "wizz[trans_nat]", class: "form-label" do %>Nature of transaction<% end %>
+		<%= f.select "wizz[trans_nat]", @trans_nat, {prompt: "Choose a Transaction Type"}, {class: "form-select"} %>
+	</div>
+	<div class="col-md-4">
+	  <%= f.label "wizz[account_debit]", class: "form-label" do %>Account to Debit<% end %>
+	  <select class="form-select" name="wizz[account_debit]" id="wizz[account_debit]">
+		<option value="">Choose an account</option>
+		<% @accounts.each do |a| %>
+		<option value="<%= a.id %>"><%= a.account_number %> - <%= a.increases %> - <%= a.title %></option>
+		<% end %>
+	  </select>
+	</div>
+	<div class="col-md-4">
+	  <%= f.label "wizz[account_credit]", class: "form-label" do %>Account to Credit<% end %>
+	  <select class="form-select" name="wizz[account_credit]" id="wizz[account_credit]">
+		<option value="">Choose an account</option>
+		<% @accounts.each do |a| %>
+		<option value="<%= a.id %>"><%= a.account_number %> - <%= a.increases %> - <%= a.title %></option>
+		<% end %>
+	  </select>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<%= f.collection_check_boxes( "wizz[dates]", @months, :to_s, :to_s) do |b| %>
+	<div class="col-1 form-check pe-3">
+	  <%= b.check_box(class: "form-check-input") %>
+	  <%= b.label class: "form-check-label" do %>
+	  	<%= Date.parse(b.label.to_s).strftime("%b %y") %>
+	  <% end %>
+	</div>
+	<% end %>
+</div>
+<div class="row">
+	<div class="col">
+		<%= f.submit "Go Wizard", class: "btn btn-outline-primary btn-sm" %>
+	</div>
+</div>
+<% end %>

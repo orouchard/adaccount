@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2023-10-28 14:17:37
+  description: MyString
+  currency: MyString
+  trans_nat: MyString
+  balanced: false
+  active: false
+
+two:
+  date: 2023-10-28 14:17:37
+  description: MyString
+  currency: MyString
+  trans_nat: MyString
+  balanced: false
+  active: false

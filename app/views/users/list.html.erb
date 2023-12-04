@@ -1,0 +1,52 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "Contacts", users_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "All", users_category_path("all"), class: "badge text-bg-info" %></li>
+    <% @categories.each do |c| %>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to c.name, users_category_path(c), class: "badge text-bg-#{c.style}" %></li>
+    <% end %>
+  </ol>
+</nav>
+
+<p style="color: green"><%= notice %></p>
+
+<h1>Contact</h1>
+
+<table class="table mb-3">
+  <thead>
+    <tr>
+      <th class="col">Title</th>
+      <th class="col">Name</th>
+      <th class="col">Invoicing</th>
+      <th class="col">Nationality</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%=user.title %></td>
+        <td>
+          <strong><%= link_to user.name, user %></strong>
+          <% user.tags.each do |t| %>
+          <%= content_tag('span', t.name, class: "badge rounded-pill text-bg-#{t.style}") %>
+          <% end %>
+        </td>
+        <td><%= pluralize(user.invoices.size, "Invoice") if user.invoices.size >= 1 %></td>
+        <td><%= user.nationality %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr/>
+
+<p class="d-inline-flex gap-1">
+  <%= link_to "[New user]", new_user_path %> | <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    [Wizzard Contact]
+  </a>
+</p>
+<div class="collapse" id="collapseExample">
+  <%= render "wizz_form" %>
+</div>

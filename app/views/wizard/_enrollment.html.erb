@@ -1,0 +1,77 @@
+<%= form_with(url: wizard_enrollment_path(@user)) do |f| %>
+
+<div class="row mb-3">
+	<div class="col-md-4">
+	  <%= f.label "wizz[line_item]", class: "form-label" do %>Item Label<% end %>
+	  <select class="form-select" name="wizz[line_item]" id="wizz[line_item]">
+		<option value="">Choose an item</option>
+		<% Product.where(kind: "catalog").each do |p| %>
+		<option value="<%= p.id %>"><%= p.name %></option>
+		<% end %>
+	  </select>
+	</div>
+	<div class="col-2">
+		<%= f.label "wizz[line_item_amount]", class: "form-label" do %>Total Amount<% end %>
+		<%= f.text_field "wizz[line_item_amount]", class: "form-control" %>
+	</div>
+	<div class="col-2">
+		<%= f.label "wizz[currency]", class: "form-label" do %>Currency<% end %>
+		<%= f.select "wizz[currency]", ["vnd"], {}, {class: "form-select"} %>
+	</div>
+	<div class="col-2">
+		<%= f.label "wizz[invoice_date]", class: "form-label" do %>Invoice Date<% end %>
+		<%= f.date_field "wizz[invoice_date]", class: "form-control" %>
+	</div>
+	<div class="col-2">
+		<%= f.label "wizz[due_date]", class: "form-label" do %>Due Date<% end %>
+		<%= f.date_field "wizz[due_date]", class: "form-control" %>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<div class="col-md-4">
+	  <%= f.label "wizz[school_period]", class: "form-label" do %>School Period<% end %>
+	  <select class="form-select" name="wizz[school_period]" id="wizz[school_period]">
+		<option value="">Choose a period</option>
+		<% Period.all.each do |p| %>
+		<option value="<%= p.id %>"><%= p.name %></option>
+		<% end %>
+	  </select>
+	</div>
+	<div class="col-2">
+		<%= f.label "wizz[start_date]", class: "form-label" do %>Start Date<% end %>
+		<%= f.date_field "wizz[start_date]", class: "form-control" %>
+	</div>
+	<div class="col-2">
+		<%= f.label "wizz[part_time]", class: "form-label" do %>Part time<% end %>
+		<%= f.select "wizz[part_time]", [100, 80, 85, 60], {}, {class: "form-select"} %>
+	</div>
+	
+	<div class="col-2">
+		<%= f.label "wizz[first_month_ratio]", class: "form-label" do %>First Month Ratio<% end %>
+		<%= f.select "wizz[first_month_ratio]", [100, 80, 60, 40, 20], {}, {class: "form-select"} %>
+	</div>
+	<div class="col-2">
+		<%= f.label "wizz[uniform]", class: "form-label" do %>New Uniform?<% end %>
+		<%= f.select "wizz[uniform]", ["yes", "no"], {}, {class: "form-select"} %>
+	</div>
+</div>
+
+
+
+<div class="row mb-3">
+	<%= f.collection_check_boxes( "wizz[dates]", @months, :to_s, :to_s) do |b| %>
+	<div class="col-1 form-check pe-3">
+	  <%= b.check_box(class: "form-check-input") %>
+	  <%= b.label class: "form-check-label" do %>
+		  <%= Date.parse(b.label.to_s).strftime("%b %y") %>
+	  <% end %>
+	</div>
+	<% end %>
+</div>
+<div class="row">
+	<div class="col">
+		<%= f.submit "Go Wizard", class: "btn btn-outline-primary btn-sm" %>
+	</div>
+</div>
+<% end %>

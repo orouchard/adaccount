@@ -1,0 +1,15 @@
+	<li class="list-group-item">
+		<div class="row">
+			<div class="col-12 text-right">
+				<%# link_to "[+]", new_journal_entry_path(@journal), class: "text-success" %>
+				<p class="d-inline-flex gap-1">
+				  <a class="text-success" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+					[New Entry]
+				  </a>
+				</p>
+				<div class="collapse" id="collapseExample">
+				  <%= render 'entries/form', entry: @journal.entries.new %>
+				</div>
+			</div>
+		</div>
+	</li>

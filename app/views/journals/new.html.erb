@@ -1,0 +1,17 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "Journal Entries", journals_path %></li>
+  </ol>
+</nav>
+
+
+<h1 class="mb-5">New Journal Entry</h1>
+
+<%= render "form", journal: @journal %>
+
+<br>
+
+<div>
+  <%= link_to "Back to journals", journals_path %>
+</div>

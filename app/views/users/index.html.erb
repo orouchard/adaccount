@@ -1,0 +1,15 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+  </ol>
+</nav>
+
+<p style="color: green"><%= notice %></p>
+
+<h1>Contact</h1>
+
+<p><%= link_to "All", users_category_path("all"), class: "btn btn-info" %> - 
+  <% @categories.each do |c| %>
+  <%= link_to c.name, users_category_path(c), class: "btn btn-#{c.style}" %>
+  <% end %>
+</p>

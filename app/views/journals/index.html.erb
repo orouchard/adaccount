@@ -1,0 +1,16 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+  </ol>
+</nav>
+
+<p style="color: green"><%= notice %></p>
+
+<h1>Journal Entries</h1>
+<p>
+  <%= link_to "Balanced", filtered_journals_path("balanced") %> | <%= link_to "Upcoming", filtered_journals_path("upcoming") %>
+</p>
+
+<%= render "index" %>
+
+<%= link_to 'New Journal', new_journal_path %>

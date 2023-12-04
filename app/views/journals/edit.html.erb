@@ -1,0 +1,16 @@
+<h1>Editing journal</h1>
+
+<%= render "form", journal: @journal %>
+
+<div class="mb-4 mt-4">
+  <ul class="list-group">
+    <% @journal.entries.each do |e| %>
+      <%= render(render_entries(e.flow, e.id), e: e) if e.active == true %>
+    <% end %>
+  </ul>
+</div>
+
+<div>
+  <%= link_to "Show this journal", @journal %> |
+  <%= link_to "Back to journals", journals_path %>
+</div>

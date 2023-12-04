@@ -1,0 +1,13 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "Products", products_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "[edit]", edit_product_path(@product) %></li>
+  </ol>
+</nav>
+
+<p style="color: green"><%= notice %></p>
+
+<hr class="mb-3"/>
+
+<%= render @price %>

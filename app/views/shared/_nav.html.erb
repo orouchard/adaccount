@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg bg-body-secondary border-bottom shadow mb-5">
+  <div class="container-fluid">
+	<%= link_to "Adaccount", root_url, class: "navbar-brand" %>
+	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+	  <ul class="navbar-nav">
+	  	<li class="nav-item">
+			<%= link_to "Home", root_url, class: "nav-link active", 'aria-current' => "page"  %>
+	  	</li>
+		<li class="nav-item">
+		  <%= link_to "Contacts", users_path, class: "nav-link active", 'aria-current' => "page"  %>
+		</li>
+		<li class="nav-item">
+		  <%= link_to "Products", products_path, class: "nav-link active", 'aria-current' => "page"  %>
+		</li>
+		<li class="nav-item">
+		  <%= link_to "Accounts", accounts_path, class: "nav-link active", 'aria-current' => "page"  %>
+		</li>
+		<li class="nav-item">
+		  <%= link_to "Journal Entries", journals_path, class: "nav-link active", 'aria-current' => "page"  %>
+		</li>
+		<li class="nav-item">
+		  <%= link_to "Invoices", invoices_path, class: "nav-link active", 'aria-current' => "page"  %>
+		</li>
+		<li class="nav-item">
+		  <%= link_to "Params", params_path, class: "nav-link active", 'aria-current' => "page"  %>
+		</li>
+		<li class="nav-item">
+		  <%= link_to "Periods", periods_path, class: "nav-link active", 'aria-current' => "page"  %>
+		</li>
+	  </ul>
+	</div>
+  </div>
+</nav>

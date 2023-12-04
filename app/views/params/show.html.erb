@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @param %>
+
+<div>
+  <%= link_to "Edit this param", edit_param_path(@param) %> |
+  <%= link_to "Back to params", params_path %>
+
+  <%= button_to "Destroy this param", @param, method: :delete %>
+</div>

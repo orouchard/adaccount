@@ -1,0 +1,16 @@
+	<!-- start CREDIT -->
+	<li class="list-group-item">
+		<div class="row mb-3">
+			<div class="col-4">
+			<% if controller_name == "journals" && action_name == "edit" %>
+				<%= button_to "Destroy this entry", journal_entry_path(@journal, e), method: :delete, class: "btn btn-outline-danger" %>
+			<% else %>
+				<%= link_to "[Edit]", edit_journal_entry_path(@journal, e) %>
+			<% end %>
+			</div>
+			<div class="col-4"><strong><%= link_to "# #{e.account.account_number}", account_path(e.account) %> <%= e.account.title %></strong></div>
+			<div class="col-2"></div>
+			<div class="col-2"><%= to_amount(e.amount, @journal.currency) %></div>
+		</div>
+	</li>
+	<!-- end CREDIT -->

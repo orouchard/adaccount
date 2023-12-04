@@ -1,0 +1,19 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to @invoice.user.name, @invoice.user %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "[edit]", edit_invoice_path(@invoice) %></li>
+  </ol>
+</nav>
+
+<p style="color: green"><%= notice %></p>
+
+<%= render "users/user", user: @invoice.user %>
+
+<hr/>
+
+<%= render "form", invoice: @invoice %>
+
+<hr/>
+
+<%= button_to "Destroy this invoice", @invoice, method: :delete, class: "btn btn-outline-danger" %>
